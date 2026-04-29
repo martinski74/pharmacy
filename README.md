@@ -43,8 +43,8 @@
 
 ```bash
 # Клониране на репозиторито
-git clone <repository-url>
-cd pharmacy-app
+git clone https://github.com/martinski74/pharmacy.git
+cd pharmacy
 
 # Инсталиране на зависимости
 npm install

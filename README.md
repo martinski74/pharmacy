@@ -98,5 +98,5 @@ name,price,quantity,expiryDate,minStockLevel
 
 ## Лиценз
 
-MIT
-# pharmacy
+    Този проект е създаден за вътрешна употреба и не е предназначен за публично разпространение.
+

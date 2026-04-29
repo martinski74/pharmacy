@@ -1,0 +1,28 @@
+{
+  "medicines": [
+    {
+      "id": "1",
+      "name": "Аспирин",
+      "price": 3.5,
+      "quantity": 50,
+      "expiryDate": "2027-06-30",
+      "minStockLevel": 10
+    },
+    {
+      "id": "2",
+      "name": "Парацетамол",
+      "price": 4,
+      "quantity": 5,
+      "expiryDate": "2026-04-15",
+      "minStockLevel": 15
+    },
+    {
+      "id": "3",
+      "name": "Ибупрофен",
+      "price": 6.5,
+      "quantity": 20,
+      "expiryDate": "2026-05-20",
+      "minStockLevel": 10
+    }
+  ]
+}

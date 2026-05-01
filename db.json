@@ -23,6 +23,16 @@
       "quantity": 20,
       "expiryDate": "2026-05-20",
       "minStockLevel": 10
+    },
+    {
+      "name": "Нурофен",
+      "price": 5.25,
+      "quantity": 10,
+      "expiryDate": "2026-06-28",
+      "minStockLevel": 10,
+      "id": "e-hBk9wYL3c",
+      "isNew": true
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

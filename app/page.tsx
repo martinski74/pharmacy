@@ -25,7 +25,7 @@ interface Medicine {
 type SortOption = 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc' | 'expiry-asc' | 'expiry-desc' | 'quantity-asc' | 'quantity-desc'
 
 export default function PharmacyApp() {
-  const API_URL = 'http://localhost:3001/medicines'
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/medicines'
   const { toast } = useToast()
   const [medicines, setMedicines] = useState<Medicine[]>([])
 

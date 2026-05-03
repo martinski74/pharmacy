@@ -23,7 +23,7 @@ var onRequestGet2 = /* @__PURE__ */ __name2(async (context) => {
 var onRequestPost = /* @__PURE__ */ __name2(async (context) => {
   const body = await context.request.json();
   await context.env.DB.prepare(
-    "INSERT INTO products (name, price, quantity, expiryDate, minStockLevel) VALUES (?, ?, ?, ?)"
+    "INSERT INTO products (name, price, quantity, expiryDate, minStockLevel) VALUES (?, ?, ?, ?, ?)"
   ).bind(body.name, body.price, body.quantity, body.minStockLevel).run();
   return Response.json({ success: true });
 }, "onRequestPost");

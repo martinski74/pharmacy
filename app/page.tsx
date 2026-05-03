@@ -103,6 +103,7 @@ export default function PharmacyApp() {
       if (!response.ok) throw new Error('Failed to add medicine')
       const savedMedicine = (await response.json()) as Medicine
       setMedicines((prev) => [...prev, { ...savedMedicine, isNew: true }])
+      fetchMedicines()
     
     } catch {
       toast({
@@ -123,11 +124,12 @@ export default function PharmacyApp() {
 
     setTimeout(() => {
       setMedicines((prev) => prev.map((m) => (m.id === newMedicine.id ? { ...m, isNew: false } : m)))
-    }, 500)
+    }, 400)
   }
 
   const handleEditMedicine = (medicine: Medicine) => {
     setEditingId(medicine.id)
+    fetchMedicines()
   }
 
   const handleSaveEdit = async (formData: Omit<Medicine, 'id'>) => {
@@ -142,6 +144,7 @@ export default function PharmacyApp() {
       if (!response.ok) throw new Error('Failed to update medicine')
       const updatedMedicine = (await response.json()) as Medicine
       setMedicines((prev) => prev.map((m) => (m.id === editingId ? { ...updatedMedicine, isEditing: false } : m)))
+      fetchMedicines()
     } catch {
       toast({
         title: 'Грешка',

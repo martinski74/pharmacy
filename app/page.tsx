@@ -36,8 +36,7 @@ export default function PharmacyApp() {
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [filterLowStock, setFilterLowStock] = useState(false)
 
-  useEffect(() => {
-    const fetchMedicines = async () => {
+  const fetchMedicines = async () => {
       try {
         const response = await fetch(API_URL)
         if (!response.ok) throw new Error('Failed to load medicines')
@@ -51,7 +50,7 @@ export default function PharmacyApp() {
         })
       }
     }
-
+  useEffect(() => {
     fetchMedicines()
   }, [toast])
 
@@ -102,6 +101,7 @@ export default function PharmacyApp() {
       if (!response.ok) throw new Error('Failed to add medicine')
       const savedMedicine = (await response.json()) as Medicine
       setMedicines((prev) => [...prev, { ...savedMedicine, isNew: true }])
+      fetchMedicines()
     } catch {
       toast({
         title: 'Грешка',

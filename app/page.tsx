@@ -9,7 +9,8 @@ import MedicineForm from '@/components/medicine-form'
 import MedicineCard from '@/components/medicine-card'
 import { exportToCSV, importFromCSV } from '@/lib/csv-utils'
 import { useToast } from '@/hooks/use-toast'
-
+import router from 'next/router'
+import { useRouter } from 'next/navigation';
 
 interface Medicine {
   id: string
@@ -35,6 +36,7 @@ export default function PharmacyApp() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [isAddingNew, setIsAddingNew] = useState(false)
   const [filterLowStock, setFilterLowStock] = useState(false)
+  const router = useRouter();
 
   const fetchMedicines = async () => {
       try {
@@ -102,6 +104,7 @@ export default function PharmacyApp() {
       const savedMedicine = (await response.json()) as Medicine
       setMedicines((prev) => [...prev, { ...savedMedicine, isNew: true }])
       fetchMedicines()
+      router.push('/')
     } catch {
       toast({
         title: 'Грешка',

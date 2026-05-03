@@ -10,6 +10,7 @@ import MedicineCard from '@/components/medicine-card'
 import { exportToCSV, importFromCSV } from '@/lib/csv-utils'
 import { useToast } from '@/hooks/use-toast'
 
+
 interface Medicine {
   id: string
   name: string
@@ -25,7 +26,7 @@ interface Medicine {
 type SortOption = 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc' | 'expiry-asc' | 'expiry-desc' | 'quantity-asc' | 'quantity-desc'
 
 export default function PharmacyApp() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/medicines'
+  const API_URL = 'api/products'
   const { toast } = useToast()
   const [medicines, setMedicines] = useState<Medicine[]>([])
 

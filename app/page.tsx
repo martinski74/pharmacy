@@ -129,6 +129,7 @@ export default function PharmacyApp() {
 
   const handleEditMedicine = (medicine: Medicine) => {
     setEditingId(medicine.id)
+    fetchMedicines()
   }
 
   const handleSaveEdit = async (formData: Omit<Medicine, 'id'>) => {

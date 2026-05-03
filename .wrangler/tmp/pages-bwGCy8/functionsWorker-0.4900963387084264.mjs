@@ -14,6 +14,28 @@ var onRequestDelete = /* @__PURE__ */ __name(async (context) => {
   await context.env.DB.prepare("DELETE FROM products WHERE id = ?").bind(id).run();
   return Response.json({ success: true });
 }, "onRequestDelete");
+var onRequestPut = /* @__PURE__ */ __name(async (context) => {
+  try {
+    const id = context.params.id;
+    const body = await context.request.json();
+    if (!body.name) {
+      return Response.json({ error: "name is required" }, { status: 400 });
+    }
+    await context.env.DB.prepare(
+      "UPDATE products SET name = ?, price = ?, quantity = ?, expiryDate = ?, minStockLevel = ? WHERE id = ?"
+    ).bind(
+      body.name,
+      body.price ?? 0,
+      body.quantity ?? 0,
+      body.expiryDate ?? null,
+      body.minStockLevel ?? 10,
+      id
+    ).run();
+    return Response.json({ success: true });
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 500 });
+  }
+}, "onRequestPut");
 
 // api/products.ts
 var onRequestGet2 = /* @__PURE__ */ __name(async (context) => {
@@ -56,6 +78,13 @@ var routes = [
     method: "GET",
     middlewares: [],
     modules: [onRequestGet]
+  },
+  {
+    routePath: "/api/products/:id",
+    mountPath: "/api/products",
+    method: "PUT",
+    middlewares: [],
+    modules: [onRequestPut]
   },
   {
     routePath: "/api/products",
@@ -560,7 +589,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-hx0lei/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-ruEfx0/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -592,7 +621,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-hx0lei/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-ruEfx0/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

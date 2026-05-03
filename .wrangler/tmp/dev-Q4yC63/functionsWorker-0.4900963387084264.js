@@ -16,6 +16,28 @@ var onRequestDelete = /* @__PURE__ */ __name2(async (context) => {
   await context.env.DB.prepare("DELETE FROM products WHERE id = ?").bind(id).run();
   return Response.json({ success: true });
 }, "onRequestDelete");
+var onRequestPut = /* @__PURE__ */ __name2(async (context) => {
+  try {
+    const id = context.params.id;
+    const body = await context.request.json();
+    if (!body.name) {
+      return Response.json({ error: "name is required" }, { status: 400 });
+    }
+    await context.env.DB.prepare(
+      "UPDATE products SET name = ?, price = ?, quantity = ?, expiryDate = ?, minStockLevel = ? WHERE id = ?"
+    ).bind(
+      body.name,
+      body.price ?? 0,
+      body.quantity ?? 0,
+      body.expiryDate ?? null,
+      body.minStockLevel ?? 10,
+      id
+    ).run();
+    return Response.json({ success: true });
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 500 });
+  }
+}, "onRequestPut");
 var onRequestGet2 = /* @__PURE__ */ __name2(async (context) => {
   const { results } = await context.env.DB.prepare("SELECT * FROM products").all();
   return Response.json(results);
@@ -54,6 +76,13 @@ var routes = [
     method: "GET",
     middlewares: [],
     modules: [onRequestGet]
+  },
+  {
+    routePath: "/api/products/:id",
+    mountPath: "/api/products",
+    method: "PUT",
+    middlewares: [],
+    modules: [onRequestPut]
   },
   {
     routePath: "/api/products",

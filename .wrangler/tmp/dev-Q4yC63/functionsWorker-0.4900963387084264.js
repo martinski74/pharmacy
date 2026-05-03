@@ -21,11 +21,24 @@ var onRequestGet2 = /* @__PURE__ */ __name2(async (context) => {
   return Response.json(results);
 }, "onRequestGet");
 var onRequestPost = /* @__PURE__ */ __name2(async (context) => {
-  const body = await context.request.json();
-  await context.env.DB.prepare(
-    "INSERT INTO products (name, price, quantity, expiryDate, minStockLevel) VALUES (?, ?, ?, ?, ?)"
-  ).bind(body.name, body.price, body.quantity, body.minStockLevel).run();
-  return Response.json({ success: true });
+  try {
+    const body = await context.request.json();
+    if (!body.name) {
+      return Response.json({ error: "name is required" }, { status: 400 });
+    }
+    await context.env.DB.prepare(
+      "INSERT INTO products (name, price, quantity, expiryDate, minStockLevel) VALUES (?, ?, ?, ?, ?)"
+    ).bind(
+      body.name,
+      body.price ?? 0,
+      body.quantity ?? 0,
+      body.expiryDate ?? null,
+      body.minStockLevel ?? 10
+    ).run();
+    return Response.json({ success: true });
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 500 });
+  }
 }, "onRequestPost");
 var routes = [
   {

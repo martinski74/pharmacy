@@ -103,8 +103,7 @@ export default function PharmacyApp() {
       if (!response.ok) throw new Error('Failed to add medicine')
       const savedMedicine = (await response.json()) as Medicine
       setMedicines((prev) => [...prev, { ...savedMedicine, isNew: true }])
-      fetchMedicines()
-      router.push('/')
+    
     } catch {
       toast({
         title: 'Грешка',
@@ -129,7 +128,6 @@ export default function PharmacyApp() {
 
   const handleEditMedicine = (medicine: Medicine) => {
     setEditingId(medicine.id)
-    fetchMedicines()
   }
 
   const handleSaveEdit = async (formData: Omit<Medicine, 'id'>) => {

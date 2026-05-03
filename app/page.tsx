@@ -58,7 +58,7 @@ export default function PharmacyApp() {
 
   // Search and filter medicines
   const filteredMedicines = medicines.filter((m) => {
-    const matchesSearch = m.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesSearch = m.name?.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesStockFilter = !filterLowStock || m.quantity < (m.minStockLevel || 10)
     return matchesSearch && matchesStockFilter
   })

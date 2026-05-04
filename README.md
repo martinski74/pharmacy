@@ -1,3 +1,4 @@
+<img width="1792" height="917" alt="Capture" src="https://github.com/user-attachments/assets/49993be9-d487-4346-b4c3-ee34e34c13a1" />
 # Аптечна Система за Управление на Лекарства
 
 Уеб приложение за управление на инвентара в аптека, разработено с Next.js и React.

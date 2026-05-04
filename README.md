@@ -1,6 +1,6 @@
 <img width="1592" height="817" alt="Capture" src="https://github.com/user-attachments/assets/49993be9-d487-4346-b4c3-ee34e34c13a1" />
 
-[Demo](https://pharmacy-4zl.pages.dev/)
+[##Demo](https://pharmacy-4zl.pages.dev/)
 
 # Аптечна Система за Управление на Лекарства
 
